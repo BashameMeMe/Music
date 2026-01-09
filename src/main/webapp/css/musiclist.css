@@ -1,0 +1,307 @@
+@charset "UTF-8";
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* SIDEBAR - đã include từ file riêng */
+        /* (giả sử sidebar.jsp đã có width: 240px và position: fixed) */
+
+        /* MAIN CONTENT */
+        .main {
+            margin-left: 240px;           /* Đẩy sang phải bằng chiều rộng sidebar */
+            flex: 1;
+            overflow-y: auto;
+            background: linear-gradient(to bottom, #121212, #0a0a0a);
+            padding: 32px 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        /* BANNER */
+        .banner {
+            height: 220px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #c273ed);
+            border-radius: 24px;
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: "BEST OF 2025";
+            position: absolute;
+            font-size: 160px;
+            opacity: 0.12;
+            white-space: nowrap;
+            transform: rotate(-12deg);
+            top: 38%;
+            left: -35%;
+            font-weight: 900;
+        }
+
+        /* SEARCH BAR */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #181818;
+            padding: 16px 24px;
+            border-radius: 999px;
+            margin-bottom: 40px;
+            max-width: 480px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus-within {
+            border-color: #c273ed;
+            box-shadow: 0 0 0 3px rgba(194,115,237,0.2);
+        }
+
+        .search-bar i {
+            color: #b3b3b3;
+            font-size: 18px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .search-bar input::placeholder {
+            color: #777;
+        }
+
+        /* SECTION */
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title a {
+            color: #c273ed;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .section-title a:hover {
+            color: #d19bff;
+        }
+
+        /* MUSIC GRID */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 28px;
+        }
+
+        .card {
+            background: #181818;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            background: #282828;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+        }
+
+        .card-img {
+            position: relative;
+        }
+
+        .card-img img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: #c273ed;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 10px 30px rgba(194,115,237,0.5);
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .play-btn {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 16px 18px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+
+        .card-subtitle {
+            color: #b3b3b3;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ACTION BUTTONS */
+        .action-buttons {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .action-buttons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            opacity: 0.9;
+        }
+
+        .card:hover .action-buttons a {
+            opacity: 1;
+        }
+
+        .action-buttons a:hover {
+            background: #c273ed;
+            transform: scale(1.15);
+        }
+
+        /* PLAYER BAR */
+        #player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 240px;
+            right: 0;
+            height: 96px;
+            background: rgba(18,18,18,0.96);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid #222;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            gap: 28px;
+            z-index: 1000;
+        }
+
+        #player-cover {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 0 4px rgba(194,115,237,0.2);
+            background: #111;
+        }
+
+        #player-cover.is-playing {
+            animation: rotateCover 14s linear infinite;
+            box-shadow: 0 10px 50px rgba(194,115,237,0.4), 0 0 0 6px rgba(194,115,237,0.3);
+        }
+
+        @keyframes rotateCover {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        #player-info {
+            flex: 1;
+        }
+
+        #player-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        #player-artist {
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        @media (max-width: 992px) {
+            .main { margin-left: 80px; }
+            #player-bar { left: 80px; }
+        }
